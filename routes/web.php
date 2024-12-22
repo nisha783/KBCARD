@@ -8,9 +8,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/card', function () {
-    return view('card');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::resource('card',CardController::class)->middleware(['auth', 'verified']);
 

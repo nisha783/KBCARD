@@ -17,7 +17,7 @@
 <nav class="-mx-3 flex flex-1 justify-end">
     @auth
         <a
-            href="{{ url('/card') }}"
+            href="{{ url('card') }}"
             class="btn btn-primary text-white mt-5 ms-5"
         >
             Dashboard
