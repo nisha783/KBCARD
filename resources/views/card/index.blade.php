@@ -153,7 +153,7 @@
                 </tr>
               </thead>
               <tbody>
-                @foreach ($cards as $card)
+                @forelse ($cards as $card)
                 <tr>
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $card->card_number }}</td>
@@ -170,11 +170,14 @@
                     </form>
                   </td>
                 </tr>
-                @endforeach
+                @empty
+                <tr>
+                  <td colspan="5" class="text-center">No cards available.</td>
+                </tr>
+                @endforelse
               </tbody>
-            {{ $cards->links('vendor.pagination.bootstrap-5') }}
-
             </table>
+            {{ $cards->links('vendor.pagination.bootstrap-5') }}
           </div>
 
         </div>

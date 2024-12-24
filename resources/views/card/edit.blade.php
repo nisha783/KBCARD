@@ -130,7 +130,7 @@
 
             <!-- Main Content -->
             <div class="col-md-9 p-4">
-                
+                <a href="{{ route('card.index') }}" class="btn btn-primary">Go Back</a>
                 <!-- Success Message -->
                 @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>

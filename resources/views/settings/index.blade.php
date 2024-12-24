@@ -142,7 +142,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($settings as $setting)
+                  <tbody>
+                    @forelse ($settings as $setting)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $setting->key }}</td>
@@ -151,7 +152,13 @@
                             <a href="{{ route('settings.edit', $setting->id) }}" class="btn btn-warning btn-sm text-white">Edit</a>
                         </td>
                     </tr>
-                    @endforeach
+                    @empty
+                    <tr>
+                        <td colspan="4" class="text-center">No settings found.</td>
+                    </tr>
+                    @endforelse
+                </tbody>
+                
                 </tbody>
             </table>
             {{ $settings->links('vendor.pagination.bootstrap-5') }}
