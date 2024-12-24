@@ -42,6 +42,7 @@ class SettingController extends Controller
             'value' => $request->input('value'),
         ]);
         return redirect()->route('settings.index')->with('success', 'Setting added successfully!');
+        
     }
 
     /**
