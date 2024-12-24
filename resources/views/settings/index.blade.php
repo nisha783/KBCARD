@@ -128,8 +128,8 @@
       <!-- Main Content -->
       <div class="col-md-9 p-4">
           <div class="d-flex justify-content-between mt-3">
-            <h3 class="fw-bold">Discount Setting</h3>
-            <a href="{{ route('settings.create') }}" class="btn btn-primary mt-3 me-4">Add New Setting</a>
+            <h3 class="fw-bold">Discount</h3>
+            <a href="{{ route('settings.create') }}" class="btn btn-primary mt-2 me-4">Add New Setting</a>
           </div>
             <table class="table table-borderd mt-5">
                 <thead>
