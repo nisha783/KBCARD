@@ -29,16 +29,20 @@
             @if($total > 0)
                 <table class="table table-bordered">
                     <tr>
-                        <td>Sub Total:</td>
-                        <td>Rs. {{ $total }}/-</td>
-                    </tr>
-                    <tr>
-                        <td>Discounted Amount:</td>
-                        <td>Rs. {{ $discount_amount }}/-</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Total Amount:</strong></td>
-                        <td><strong>Rs. {{ $grand_total }}/-</strong></td>
+                        <td>Card Rate:</td>
+                                <td>Rs. {{ $total / max($quantity, 1) }}/-</td>
+                            </tr>
+                            <tr>
+                                <td>Sub Total:</td>
+                                <td>Rs. {{ $total }}/-</td>
+                            </tr>
+                            <tr>
+                                <td>Discounted Amount:</td>
+                                <td>Rs. {{ $discount_amount }}/-</td>
+                            </tr>
+                            <tr>
+                                <td><strong>Total Amount:</strong></td>
+                                <td><strong>Rs. {{ $grand_total }}/-</strong></td>
                     </tr>
                 </table>
             @endif

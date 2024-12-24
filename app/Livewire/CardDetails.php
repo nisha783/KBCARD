@@ -15,16 +15,27 @@ class CardDetails extends Component
     public $total = 0;
     public $discount_amount = 0;
     public $grand_total = 0;
+    public $discount = 0;
 
    
+    public function mount()
+    {
+        $setting = Setting::where('key', 'discount')->first();
+        $this->discount = $setting ? $setting->value : 0; // Load the discount value
+    }
+
+    /**
+     * Calculate totals based on card selection and quantity
+     */
     public function calculate()
     {
         $card = Card::find($this->card_id);
-            $setting = Setting::where('key', 'discount')->first();
-        $discount = $setting ?  $setting->value : 0;
-        $this->total = $card->price * $this->quantity;
-        $this->discount_amount = $this->total * $discount / 100;
-        $this->grand_total = $this->total - $this->discount_amount;
+        
+        if ($card) {
+            $this->total = $card->price * $this->quantity;
+            $this->discount_amount = $this->total * $this->discount / 100;
+            $this->grand_total = $this->total - $this->discount_amount;
+        }
     }  
     public function render()
     {
