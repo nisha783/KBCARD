@@ -9,7 +9,7 @@
             </div>
             <div class="card-body">
                 <div class="row">
-                    @foreach ($cards as $card)
+                    @forelse ($cards as $card)
                         <div class="col-md-4 mb-3">
                             <div class="card">
                                 <div class="card-body">
@@ -19,9 +19,11 @@
                                 </div>
                             </div>
                         </div>
-                        @endforeach
-                 {{ $cards->links('vendor.pagination.bootstrap-5') }}
+                    @empty
+                        <p class="text-center">No cards available.</p>
+                    @endforelse
                 </div>
+                {{ $cards->links('vendor.pagination.bootstrap-5') }}
             </div>
         </div>
     </div>
