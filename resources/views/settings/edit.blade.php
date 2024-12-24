@@ -111,7 +111,6 @@
         </button>
         <h4 class="text-center fw-bold mt-3">KB Card</h4>
         <ul class="list-unstyled">
-          <li><a href="{{ route('dashboard.index') }}" class="mt-3 fw-bold {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">Dashboard</a></li>
           <span class="ms-3 mt-5 " style="font-size: 13px">Manage card</span>
           <li><a href="{{ route('card.create') }}" class="mt-3 fw-bold {{ request()->routeIs('card.create') ? 'active' : '' }}">Add Card</a></li>
           <li><a href="{{ route('card.index') }}" class="mt-3 fw-bold {{ request()->routeIs('card.index') ? 'active' : '' }}">All Cards</a></li>
