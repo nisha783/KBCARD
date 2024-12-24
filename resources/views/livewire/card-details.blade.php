@@ -12,7 +12,7 @@
                         <select id="card_id" class="form-select" wire:model="card_id">
                             <option value="">Select a Card</option>
                             @foreach($cards as $card)
-                                <option value="{{ $card->id }}">Card#: {{ $card->id }}</option>
+                                <option value="{{ $card->id }}">{{ $card->card_number }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -30,7 +30,7 @@
                 <table class="table table-bordered">
                     <tr>
                         <td>Card Rate:</td>
-                                <td>Rs. {{ $total / max($quantity, 1) }}/-</td>
+                                <td>Rs. {{$total / max($quantity, 1)}}/-</td>
                             </tr>
                             <tr>
                                 <td>Sub Total:</td>
@@ -39,6 +39,10 @@
                             <tr>
                                 <td>Discounted Amount:</td>
                                 <td>Rs. {{ $discount_amount }}/-</td>
+                            </tr>
+                            <tr>
+                                <td>Extra Inner Price:</td>
+                                <td>Rs. {{ $inner_price_total }}/-</td>
                             </tr>
                             <tr>
                                 <td><strong>Total Amount:</strong></td>

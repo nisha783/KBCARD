@@ -20,7 +20,7 @@
                 <tr>
                   <th>#</th>
                   <th>Card Number</th>
-                  <th>Quantity</th>
+                  <th>Inner Price</th>
                   <th>Price</th>
                   <th>Actions</th>
                 </tr>
@@ -30,7 +30,7 @@
                 <tr>
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $card->card_number }}</td>
-                  <td>{{ $card->qty }}</td>
+                  <td>{{ $card->inner_price }}</td>
                   <td>{{ $card->price }}</td>
                   <td>
                     <!-- Edit Button -->

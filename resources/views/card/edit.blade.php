@@ -31,9 +31,9 @@
                                     
                                     <!-- Quantity -->
                                     <div class="mb-3">
-                                        <label for="qty" class="form-label">Quantity</label>
-                                        <input type="number" class="form-control @error('qty') is-invalid @enderror"
-                                        id="qty" name="qty" value="{{ old('qty', $card->qty) }}" required>
+                                        <label for="inner_price" class="form-label">Inner Price</label>
+                                        <input type="number" class="form-control @error('inner_price') is-invalid @enderror"
+                                        id="qty" name="inner_price" value="{{ old('inner_price', $card->inner_price) }}" required>
                                         @error('qty')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror

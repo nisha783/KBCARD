@@ -11,6 +11,6 @@ class Card extends Model
     use HasFactory;
 
     protected $fillable = [
-        'card_number', 'qty', 'price',
+        'card_number', 'inner_price', 'price',
     ];
 }
