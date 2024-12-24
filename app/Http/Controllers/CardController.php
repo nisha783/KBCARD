@@ -14,7 +14,7 @@ class CardController extends Controller
     public function index()
     {
         // Get all cards from the database
-        $cards = Card::all();
+        $cards = Card::paginate(5);
         return view('card.index', compact('cards'));
     }
 

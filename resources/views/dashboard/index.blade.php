@@ -113,8 +113,11 @@
         <h4 class="text-center fw-bold mt-3">KB Card</h4>
         <ul class="list-unstyled">
           <li><a href="{{ route('dashboard.index') }}" class="mt-3 fw-bold {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">Dashboard</a></li>
+        
+        <span class="ms-3 mt-5 " style="font-size: 13px">Manage card</span>
           <li><a href="{{ route('card.create') }}" class="mt-3 fw-bold {{ request()->routeIs('card.create') ? 'active' : '' }}">Add Card</a></li>
           <li><a href="{{ route('card.index') }}" class="mt-3 fw-bold {{ request()->routeIs('card.index') ? 'active' : '' }}">All Cards</a></li>
+          <span class="ms-3 t-3" style="font-size: 13px">options</span>
           <li><a href="{{ route('rate.index') }}" class="mt-3 fw-bold {{ request()->routeIs('rate.index') ? 'active' : '' }}">Get Rates</a></li>
           <li><a href="{{ route('settings.index') }}" class="mt-3 fw-bold {{ request()->routeIs('settings.index') ? 'active' : '' }}">Website Setting</a></li>
         </ul>
@@ -126,56 +129,12 @@
 
       <!-- Main Content -->
       <div class="col-md-9 p-4">
-     <div class="d-flex justify-content-between mt-3">
-      <h3 class=" fw-bold">Card Details</h3>
-      <a href="{{ route('card.create') }}" class="btn btn-primary  me-4 ms-0 ms-md-5">Add Card</a>
-     </div>
+        <h3 class="text-center fw-bold">Card Details</h3>
 
-        <div class="container mt-5">
+        <!-- Add Card Button -->
+        <a href="{{ route('card.create') }}" class="btn btn-primary mt-4 ms-0 ms-md-5">Add Card</a>
 
-          <!-- Success Message -->
-          @if (session('success'))
-          <div class="alert alert-success">{{ session('success') }}</div>
-          @endif
-
-          <!-- Responsive Table -->
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Card Number</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($cards as $card)
-                <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $card->card_number }}</td>
-                  <td>{{ $card->qty }}</td>
-                  <td>{{ $card->price }}</td>
-                  <td>
-                    <!-- Edit Button -->
-                    <a href="{{ route('card.edit', $card->id) }}" class="btn btn-warning btn-sm text-white">Edit</a>
-                    <!-- Delete Form -->
-                    <form action="{{ route('card.destroy', $card->id) }}" method="POST" style="display:inline;">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                    </form>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
-            {{ $cards->links('vendor.pagination.bootstrap-5') }}
-
-            </table>
-          </div>
-
-        </div>
+        
       </div>
     </div>
   </div>

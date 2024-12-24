@@ -112,12 +112,12 @@
         </button>
         <h4 class="text-center fw-bold mt-3">KB Card</h4>
         <ul class="list-unstyled">
-          <li><a href="{{ route('dashboard.index') }}" class="mt-3 fw-bold {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">Dashboard</a></li>
-          <li><a href="{{ route('card.create') }}" class="mt-3 fw-bold {{ request()->routeIs('card.create') ? 'active' : '' }}">Add Card</a></li>
-          <li><a href="{{ route('card.index') }}" class="mt-3 fw-bold {{ request()->routeIs('card.index') ? 'active' : '' }}">All Cards</a></li>
-          <li><a href="{{ route('rate.index') }}" class="mt-3 fw-bold {{ request()->routeIs('rate.index') ? 'active' : '' }}">Get Rates</a></li>
-          <li><a href="{{ route('settings.index') }}" class="mt-3 fw-bold {{ request()->routeIs('settings.index') ? 'active' : '' }}">Website Setting</a></li>
-        </ul>
+            <li><a href="{{ route('dashboard.index') }}" class="mt-3 fw-bold {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">Dashboard</a></li>
+            <li><a href="{{ route('card.create') }}" class="mt-3 fw-bold {{ request()->routeIs('card.create') ? 'active' : '' }}">Add Card</a></li>
+            <li><a href="{{ route('card.index') }}" class="mt-3 fw-bold {{ request()->routeIs('card.index') ? 'active' : '' }}">All Cards</a></li>
+            <li><a href="{{ route('rate.index') }}" class="mt-3 fw-bold {{ request()->routeIs('rate.index') ? 'active' : '' }}">Get Rates</a></li>
+            <li><a href="{{ route('settings.index') }}" class="mt-3 fw-bold {{ request()->routeIs('settings.index') ? 'active' : '' }}">Website Setting</a></li>
+          </ul>
          <a href="#" class="logout-link fw-bold" onclick="document.getElementById('logout-form').submit();">Logout</a>
          <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
            @csrf
@@ -126,55 +126,33 @@
 
       <!-- Main Content -->
       <div class="col-md-9 p-4">
-     <div class="d-flex justify-content-between mt-3">
-      <h3 class=" fw-bold">Card Details</h3>
-      <a href="{{ route('card.create') }}" class="btn btn-primary  me-4 ms-0 ms-md-5">Add Card</a>
-     </div>
-
-        <div class="container mt-5">
-
-          <!-- Success Message -->
-          @if (session('success'))
-          <div class="alert alert-success">{{ session('success') }}</div>
-          @endif
-
-          <!-- Responsive Table -->
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Card Number</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($cards as $card)
-                <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $card->card_number }}</td>
-                  <td>{{ $card->qty }}</td>
-                  <td>{{ $card->price }}</td>
-                  <td>
-                    <!-- Edit Button -->
-                    <a href="{{ route('card.edit', $card->id) }}" class="btn btn-warning btn-sm text-white">Edit</a>
-                    <!-- Delete Form -->
-                    <form action="{{ route('card.destroy', $card->id) }}" method="POST" style="display:inline;">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                    </form>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
-            {{ $cards->links('vendor.pagination.bootstrap-5') }}
-
-            </table>
+          <div class="d-flex justify-content-between mt-3">
+            <h3 class="fw-bold">Discount Setting</h3>
+            <a href="{{ route('settings.create') }}" class="btn btn-primary mt-3 me-4">Add New Setting</a>
           </div>
-
+            <table class="table table-borderd mt-5">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Key</th>
+                        <th>Value</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach ($settings as $setting)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $setting->key }}</td>
+                        <td>{{ $setting->value }}%</td>
+                        <td>
+                            <a href="{{ route('settings.edit', $setting->id) }}" class="btn btn-warning btn-sm text-white">Edit</a>
+                        </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            {{ $settings->links('vendor.pagination.bootstrap-5') }}
         </div>
       </div>
     </div>

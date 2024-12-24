@@ -51,12 +51,11 @@
 
     /* Logout Link */
     .logout-link {
-      margin-top: auto; /* Pushes the logout link to the bottom */
+      margin-top: auto;
       margin-bottom: 20px;
       color: white;
       text-align: center;
       padding: 10px;
-      background-color: #dc3545;
       border-radius: 5px;
       display: block;
       font-size: 18px;
@@ -99,8 +98,7 @@
 
   <!-- Sidebar Toggle Button for Mobile -->
   <div class="d-md-none bg-primary text-white p-2">
-    <button class="btn btn-light btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
-      aria-expanded="false" aria-controls="sidebarMenu">
+    <button class="btn btn-light btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-expanded="false" aria-controls="sidebarMenu">
       ☰ Menu
     </button>
   </div>
@@ -110,12 +108,14 @@
 
       <!-- Sidebar -->
       <div class="col-md-3 sidebar p-3 collapse d-md-block" id="sidebarMenu">
-        <!-- Close Button for mobile view -->
         <button class="close-btn" type="button" onclick="closeSidebar()">×</button>
         <h4 class="text-center fw-bold mt-3">Dashboard</h4>
         <ul class="list-unstyled">
-          <li><a href="{{ route('card.index') }}" class="mt-3 fw-bold{{ request()->routeIs('card.index') ? ' active' : '' }}">Cards</a></li>
-          <li><a href="{{ route('card.create') }}" class="mt-3 fw-bold{{ request()->routeIs('card.create') ? ' active' : '' }}">Add Card</a></li>
+          <li><a href="{{ route('dashboard.index') }}" class="mt-3 fw-bold {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">Dashboard</a></li>
+          <li><a href="{{ route('card.create') }}" class="mt-3 fw-bold {{ request()->routeIs('card.create') ? 'active' : '' }}">Add Card</a></li>
+          <li><a href="{{ route('card.index') }}" class="mt-3 fw-bold {{ request()->routeIs('card.index') ? 'active' : '' }}">All Cards</a></li>
+          <li><a href="{{ route('rate.index') }}" class="mt-3 fw-bold {{ request()->routeIs('rate.index') ? 'active' : '' }}">Get Rates</a></li>
+          <li><a href="{{ route('settings.index') }}" class="mt-3 fw-bold {{ request()->routeIs('settings.index') ? 'active' : '' }}">Website Setting</a></li>
         </ul>
         <a href="#" class="logout-link fw-bold" onclick="document.getElementById('logout-form').submit();">Logout</a>
         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -124,50 +124,50 @@
       </div>
 
       <!-- Main Content -->
-      <div class="col-md-9 p-4">
-        <h3 class="text-center fw-bold">Add New Card</h3>
+      <div class="col-md-9 d-flex justify-content-center align-items-center vh-100">
+        <div class="card shadow-lg w-100" style="max-width: 500px;">
+          <div class="card-body">
+            <h4 class="card-title text-center mb-4 fw-bold">Add New Card</h4>
+            <!-- Success Message -->
+            @if (session('success'))
+            <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
 
-        <!-- Success Message -->
-        @if (session('success'))
-        <div class="alert alert-success">{{ session('success') }}</div>
-        @endif
+            <!-- Card Add Form -->
+            <form action="{{ route('card.store') }}" method="POST">
+              @csrf
 
-        <!-- Card Add Form -->
-        <div class="container mt-5">
-          <form action="{{ route('card.store') }}" method="POST">
-            @csrf
+              <!-- Card Number -->
+              <div class="mb-3">
+                <label for="card_number" class="form-label">Card Number</label>
+                <input type="text" class="form-control @error('card_number') is-invalid @enderror" id="card_number" name="card_number" value="{{ old('card_number') }}" required>
+                @error('card_number')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
 
-            <!-- Card Number -->
-            <div class="mb-3">
-              <label for="card_number" class="form-label">Card Number</label>
-              <input type="text" class="form-control @error('card_number') is-invalid @enderror" id="card_number" name="card_number" value="{{ old('card_number') }}" required>
-              @error('card_number')
-              <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
+              <!-- Quantity -->
+              <div class="mb-3">
+                <label for="qty" class="form-label">Quantity</label>
+                <input type="number" class="form-control @error('qty') is-invalid @enderror" id="qty" name="qty" value="{{ old('qty') }}" required>
+                @error('qty')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
 
-            <!-- Quantity -->
-            <div class="mb-3">
-              <label for="qty" class="form-label">Quantity</label>
-              <input type="number" class="form-control @error('qty') is-invalid @enderror" id="qty" name="qty" value="{{ old('qty') }}" required>
-              @error('qty')
-              <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
+              <!-- Price -->
+              <div class="mb-3">
+                <label for="price" class="form-label">Price</label>
+                <input type="number" step="0.01" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}" required>
+                @error('price')
+                <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+              </div>
 
-            <!-- Price -->
-            <div class="mb-3">
-              <label for="price" class="form-label">Price</label>
-              <input type="number" step="0.01" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}" required>
-              @error('price')
-              <div class="invalid-feedback">{{ $message }}</div>
-              @enderror
-            </div>
-
-            <button type="submit" class="btn btn-primary">Add Card</button>
-          </form>
+              <button type="submit" class="btn btn-primary w-100">Add Card</button>
+            </form>
+          </div>
         </div>
-
       </div>
 
     </div>
@@ -177,10 +177,9 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // Function to close the sidebar on mobile
     function closeSidebar() {
       const sidebar = document.getElementById('sidebarMenu');
-      sidebar.classList.remove('show'); // Removes the 'show' class to hide the sidebar
+      sidebar.classList.remove('show');
     }
   </script>
 

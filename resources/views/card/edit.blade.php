@@ -56,7 +56,6 @@
             color: white;
             text-align: center;
             padding: 10px;
-            background-color: #dc3545;
             border-radius: 5px;
             display: block;
             font-size: 18px;
@@ -115,9 +114,12 @@
                 <button class="close-btn" type="button" onclick="closeSidebar()">×</button>
                 <h4 class="text-center fw-bold mt-3">Dashboard</h4>
                 <ul class="list-unstyled">
-                    <li><a href="{{ route('card.index') }}" class=" mt-3 fw-bold {{ request()->routeIs('card.index') ? 'active' : '' }}">Cards</a></li>
-                    <li><a href="{{ route('card.create') }}" class="mt-3 fw-bold  {{ request()->routeIs('card.create') ? 'active' : '' }}">Add Card</a></li>
-                </ul>
+                    <li><a href="{{ route('dashboard.index') }}" class="mt-3 fw-bold {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">Dashboard</a></li>
+                    <li><a href="{{ route('card.create') }}" class="mt-3 fw-bold {{ request()->routeIs('card.create') ? 'active' : '' }}">Add Card</a></li>
+                    <li><a href="{{ route('card.index') }}" class="mt-3 fw-bold {{ request()->routeIs('card.index') ? 'active' : '' }}">All Cards</a></li>
+                    <li><a href="{{ route('rate.index') }}" class="mt-3 fw-bold {{ request()->routeIs('rate.index') ? 'active' : '' }}">Get Rates</a></li>
+                    <li><a href="{{ route('settings.index') }}" class="mt-3 fw-bold {{ request()->routeIs('settings.index') ? 'active' : '' }}">Website Setting</a></li>
+                  </ul>
                 <a href="#" class="logout-link fw-bold" onclick="document.getElementById('logout-form').submit();">Logout</a>
                 <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   @csrf
@@ -126,18 +128,20 @@
 
             <!-- Main Content -->
             <div class="col-md-9 p-4">
-                <h1 class="text-center mb-4">Edit Card</h1>
-
+                
                 <!-- Success Message -->
                 @if (session('success'))
-                    <div class="alert alert-success">{{ session('success') }}</div>
+                <div class="alert alert-success">{{ session('success') }}</div>
                 @endif
-
+                
                 <!-- Card Form in Bootstrap Card -->
                 <div class="row justify-content-center">
-                    <div class="col-md-8">
-                        <div class="card-body">
-                            <form action="{{ route('card.update', $card->id) }}" method="POST">
+                    <div class="col-md-6 mt-5">
+                        <div class="card  shadow">
+                            
+                            <div class="card-body">
+                                <h1 class="text-center mb-4">Edit Card</h1>
+                                <form action="{{ route('card.update', $card->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
 
@@ -148,21 +152,21 @@
                                         id="card_number" name="card_number" value="{{ old('card_number', $card->card_number) }}" required>
                                     @error('card_number')
                                         <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <!-- Quantity -->
-                                <div class="mb-3">
-                                    <label for="qty" class="form-label">Quantity</label>
-                                    <input type="number" class="form-control @error('qty') is-invalid @enderror"
+                                        @enderror
+                                    </div>
+                                    
+                                    <!-- Quantity -->
+                                    <div class="mb-3">
+                                        <label for="qty" class="form-label">Quantity</label>
+                                        <input type="number" class="form-control @error('qty') is-invalid @enderror"
                                         id="qty" name="qty" value="{{ old('qty', $card->qty) }}" required>
-                                    @error('qty')
+                                        @error('qty')
                                         <div class="invalid-feedback">{{ $message }}</div>
-                                    @enderror
-                                </div>
-
-                                <!-- Price -->
-                                <div class="mb-3">
+                                        @enderror
+                                    </div>
+                                    
+                                    <!-- Price -->
+                                    <div class="mb-3">
                                     <label for="price" class="form-label">Price</label>
                                     <input type="number" step="0.01" class="form-control @error('price') is-invalid @enderror"
                                         id="price" name="price" value="{{ old('price', $card->price) }}" required>
@@ -177,6 +181,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
             </div>
 
         </div>

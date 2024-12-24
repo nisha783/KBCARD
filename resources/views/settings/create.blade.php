@@ -50,7 +50,7 @@
     }
 
     .logout-link {
-      margin-top: auto; /* Pushes logout link to the bottom */
+      margin-top: auto;
       margin-bottom: 20px;
       color: white;
       text-align: center;
@@ -106,7 +106,6 @@
 
       <!-- Sidebar -->
       <div class="col-md-3 sidebar p-3 collapse d-md-block" id="sidebarMenu">
-        <!-- Close Button visible on mobile -->
         <button class="close-btn" type="button" onclick="closeSidebar()">
           &times;
         </button>
@@ -115,66 +114,33 @@
           <li><a href="{{ route('dashboard.index') }}" class="mt-3 fw-bold {{ request()->routeIs('dashboard.index') ? 'active' : '' }}">Dashboard</a></li>
           <li><a href="{{ route('card.create') }}" class="mt-3 fw-bold {{ request()->routeIs('card.create') ? 'active' : '' }}">Add Card</a></li>
           <li><a href="{{ route('card.index') }}" class="mt-3 fw-bold {{ request()->routeIs('card.index') ? 'active' : '' }}">All Cards</a></li>
-          <li><a href="{{ route('rate.index') }}" class="mt-3 fw-bold {{ request()->routeIs('rate.index') ? 'active' : '' }}">Get Rates</a></li>
+          <li><a href="{{ route('rate.index') }}" class="mt-3 fw-bold {{ request()->routeIs('rate.index') ? 'active' : '' }}">Get Rate</a></li>
           <li><a href="{{ route('settings.index') }}" class="mt-3 fw-bold {{ request()->routeIs('settings.index') ? 'active' : '' }}">Website Setting</a></li>
         </ul>
-         <a href="#" class="logout-link fw-bold" onclick="document.getElementById('logout-form').submit();">Logout</a>
-         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-           @csrf
-         </form>
+        <a href="#" class="logout-link fw-bold" onclick="document.getElementById('logout-form').submit();">Logout</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>
       </div>
 
       <!-- Main Content -->
-      <div class="col-md-9 p-4">
-     <div class="d-flex justify-content-between mt-3">
-      <h3 class=" fw-bold">Card Details</h3>
-      <a href="{{ route('card.create') }}" class="btn btn-primary  me-4 ms-0 ms-md-5">Add Card</a>
-     </div>
-
-        <div class="container mt-5">
-
-          <!-- Success Message -->
-          @if (session('success'))
-          <div class="alert alert-success">{{ session('success') }}</div>
-          @endif
-
-          <!-- Responsive Table -->
-          <div class="table-responsive">
-            <table class="table table-bordered">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Card Number</th>
-                  <th>Quantity</th>
-                  <th>Price</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                @foreach ($cards as $card)
-                <tr>
-                  <td>{{ $loop->iteration }}</td>
-                  <td>{{ $card->card_number }}</td>
-                  <td>{{ $card->qty }}</td>
-                  <td>{{ $card->price }}</td>
-                  <td>
-                    <!-- Edit Button -->
-                    <a href="{{ route('card.edit', $card->id) }}" class="btn btn-warning btn-sm text-white">Edit</a>
-                    <!-- Delete Form -->
-                    <form action="{{ route('card.destroy', $card->id) }}" method="POST" style="display:inline;">
-                      @csrf
-                      @method('DELETE')
-                      <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure?')">Delete</button>
-                    </form>
-                  </td>
-                </tr>
-                @endforeach
-              </tbody>
-            {{ $cards->links('vendor.pagination.bootstrap-5') }}
-
-            </table>
+      <div class="col-md-9 d-flex align-items-center justify-content-center">
+        <div class="card w-50">
+          <div class="card-body">
+            <h4 class="card-title text-center mb-4">Add New Setting</h4>
+            <form action="{{ route('settings.store') }}" method="POST">
+              @csrf
+              <div class="mb-3">
+                <label for="key" class="form-label">Key</label>
+                <input type="text" name="key" id="key" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label for="value" class="form-label">Value</label>
+                <input type="text" name="value" id="value" class="form-control">
+              </div>
+              <button type="submit" class="btn btn-primary w-100">Save</button>
+            </form>
           </div>
-
         </div>
       </div>
     </div>
@@ -184,12 +150,12 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
-    // JavaScript to close the sidebar on mobile when close button is clicked
     function closeSidebar() {
       const sidebar = document.getElementById('sidebarMenu');
-      sidebar.classList.remove('show'); // Removes the 'show' class to hide the sidebar
+      sidebar.classList.remove('show');
     }
   </script>
+
 </body>
 
 </html>
