@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-    <div class="col-md-9 d-flex align-items-center justify-content-center">
+    <div class="col-md-9 d-flex align-items-center justify-content-center"  style="margin-bottom: 300px;">
         <div class="card w-50">
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>

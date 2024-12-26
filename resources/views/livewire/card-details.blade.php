@@ -23,34 +23,48 @@
                         <input type="number" id="quantity" class="form-control" wire:model="quantity">
                     </div>
 
+                    <!-- Inner Quantity Input -->
+                    <div class="mb-3">
+                        <label for="inner_quantity" class="form-label">Inner Qty</label>
+                        <input type="number" id="inner_quantity" class="form-control" wire:model="inner_quantity">
+                    </div>
+
                     <!-- Calculate Button -->
                     <button class="btn btn-primary" wire:click="calculate">Calculate Now</button>
                 </div>
-            @if($total > 0)
+
+                @if($grand_total > 0)
                 <table class="table table-bordered">
                     <tr>
                         <td>Card Rate:</td>
-                                <td>Rs. {{$total / max($quantity, 1)}}/-</td>
-                            </tr>
-                            <tr>
-                                <td>Sub Total:</td>
-                                <td>Rs. {{ $total }}/-</td>
-                            </tr>
-                            <tr>
-                                <td>Discounted Amount:</td>
-                                <td>Rs. {{ $discount_amount }}/-</td>
-                            </tr>
-                            <tr>
-                                <td>Extra Inner Price:</td>
-                                <td>Rs. {{ $inner_price_total }}/-</td>
-                            </tr>
-                            <tr>
-                                <td><strong>Total Amount:</strong></td>
-                                <td><strong>Rs. {{ $grand_total }}/-</strong></td>
+                        <td>Rs. {{ $total / max($quantity, 1) }}/-</td>
+                    </tr>
+                    <tr>
+                        <td>Sub Total:</td>
+                        <td>Rs. {{ $total }}/-</td>
+                    </tr>
+                    <tr>
+                        <td>Discounted Amount:</td>
+                        <td>Rs. {{ $discount_amount }}/-</td>
+                    </tr>
+                    <tr>
+                        <td>Total Inners:</td>
+                        <td>{{ $total_inners }}</td>
+                    </tr>
+                    <tr>
+                        <td>Total Inner Cost:</td>
+                        <td>Rs. {{ $inner_price_total }}/-</td>
+                    </tr>
+                    <tr>
+                        <td>Extra Inner Price:</td>
+                        <td>Rs. {{ $extra_inner_price }}/-</td>  <!-- Add Extra Inner Price row here -->
+                    </tr>
+                    <tr>
+                        <td><strong>Total Amount:</strong></td>
+                        <td><strong>Rs. {{ $grand_total }}/-</strong></td>
                     </tr>
                 </table>
-            @endif
-
+                @endif
             </div>
         </div>
     </div>
