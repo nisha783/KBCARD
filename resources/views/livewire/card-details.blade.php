@@ -1,5 +1,6 @@
 <div class="container mt-4">
     <div class="row justify-content-center">
+        <!-- First Column: Inputs -->
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header bg-primary text-white">
@@ -30,42 +31,62 @@
                     </div>
 
                     <!-- Calculate Button -->
-                    <button class="btn btn-primary" wire:click="calculate">Calculate Now</button>
+                    <button class="btn btn-primary w-100" wire:click="calculate">Calculate Now</button>
                 </div>
-
-                @if($grand_total > 0)
-                <table class="table table-bordered">
-                    <tr>
-                        <td>Card Rate:</td>
-                        <td>Rs. {{ $total / max($quantity, 1) }}/-</td>
-                    </tr>
-                    <tr>
-                        <td>Sub Total:</td>
-                        <td>Rs. {{ $total }}/-</td>
-                    </tr>
-                    <tr>
-                        <td>Discounted Amount:</td>
-                        <td>Rs. {{ $discount_amount }}/-</td>
-                    </tr>
-                    <tr>
-                        <td>Total Inners:</td>
-                        <td>{{ $total_inners }}</td>
-                    </tr>
-                    <tr>
-                        <td>Total Inner Cost:</td>
-                        <td>Rs. {{ $inner_price_total }}/-</td>
-                    </tr>
-                    <tr>
-                        <td>Extra Inner Price:</td>
-                        <td>Rs. {{ $extra_inner_price }}/-</td>  <!-- Add Extra Inner Price row here -->
-                    </tr>
-                    <tr>
-                        <td><strong>Total Amount:</strong></td>
-                        <td><strong>Rs. {{ $grand_total }}/-</strong></td>
-                    </tr>
-                </table>
-                @endif
             </div>
         </div>
+
+        <!-- Second Column: Calculated Results -->
+        @if($grand_total > 0)
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Calculation Results</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-bordered">
+                        <!-- Card Rate (Price per unit) -->
+                        <tr>
+                            <td>Card Rate:</td>
+                            <td>Rs. {{ $card ? number_format($card->price, 2) : '0.00' }}/-</td>
+                        </tr>
+                        <!-- Sub Total before discount -->
+                        <tr>
+                            <td>Sub Total:</td>
+                            <td>Rs. {{ number_format($total, 2) }}/-</td>
+                        </tr>
+                        <!-- Discount Percentage -->
+                        <tr>
+                            <td>Discount ({{ $discount }}%):</td>
+                            <td>Rs. {{ number_format($discount_amount, 2) }}/-</td>
+                        </tr>
+                        <!-- Remaining Amount after Discount -->
+                        <tr>
+                            <td>Sub Total Amount:</td>
+                            <td>Rs. {{ number_format($total - $discount_amount, 2) }}/-</td>
+                        </tr>
+                        <!-- Inner Price per unit -->
+                        <tr>
+                            <td>Inner Price:</td>
+                            <td>Rs. {{ $card ? number_format($card->inner_price, 2) : '0.00' }}/-</td>
+                        </tr>
+                        <!-- Inner Quantity -->
+                        <tr>
+                            <td>Inner Quantity:</td>
+                            <td>{{ $inner_quantity }}</td>
+                        </tr>
+                        <tr>
+                            <td>Total Inner Cost:</td>
+                            <td>Rs. {{ number_format($inner_price_total, 2) }}/-</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Total Amount:</strong></td>
+                            <td><strong>Rs. {{ number_format($grand_total, 2) }}/-</strong></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 </div>
