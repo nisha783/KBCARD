@@ -3,7 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\Card;
-use App\Models\Rate;    
+use App\Models\rate;    
 use App\Models\Setting;
 use Livewire\Component;
 
@@ -30,7 +30,7 @@ class CardDetails extends Component
     public function saveRate()
     {
         // Save the calculated rates into the database for future reference
-        Rate::create([
+        rate::create([
             'card_id' => $this->card_id,
             'quantity' => $this->quantity,
             'inner_quantity' => $this->inner_quantity,
