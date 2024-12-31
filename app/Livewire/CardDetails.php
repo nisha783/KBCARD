@@ -46,15 +46,20 @@ class CardDetails extends Component
         // Fetch the card details based on the selected card_id
         $card = Card::find($this->card_id);
 
-        $rate = Rate::where('card_id', $this->card_id)->first();
+        if ($card) {
+            // Calculate totals based on the selected card's properties
+            $card_rate = $card->price ?? 0;
+            $this->total = $card_rate * $this->quantity;
 
-        if ($card && $rate) {
-            $card_rate = $card->price;
-            $this->total = $card_rate * $this->quantity; 
-            $this->discount = is_numeric($this->discount) && $this->discount > 0 ? $this->discount : 0;
+            $this->discount = (is_numeric($this->discount) && $this->discount > 0) ? $this->discount : 0;
             $this->discount_amount = ($this->total * $this->discount) / 100;
-            $this->inner_price_total = $card->inner_price * $this->inner_quantity;
+
+            $this->inner_price_total = ($card->inner_price ?? 0) * $this->inner_quantity;
+
+            // Calculate the grand total (ensure it doesn’t go negative)
             $this->grand_total = max(0, $this->total + $this->inner_price_total - $this->discount_amount);
+
+            // Save calculated values into the rate model
             $this->saveRate();
         } else {
             // Handle case where no valid card is selected
