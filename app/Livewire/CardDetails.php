@@ -22,14 +22,13 @@ class CardDetails extends Component
 
     public function mount()
     {
-        // Load the discount setting from the Setting model
         $setting = Setting::where('key', 'discount')->first();
         $this->discount = $setting ? $setting->value : 0;
     }
 
     public function saveRate()
     {
-        // Save the calculated rates into the database for future reference
+        // 
         rate::create([
             'card_id' => $this->card_id,
             'quantity' => $this->quantity,
@@ -44,36 +43,27 @@ class CardDetails extends Component
 
     public function calculate()
     {
-        // Fetch the card details from the Card model
+        // Fetch the card details based on the selected card_id
         $card = Card::find($this->card_id);
 
-        // Fetch Rate data from Rate model based on selected card
         $rate = Rate::where('card_id', $this->card_id)->first();
 
         if ($card && $rate) {
-            // Card Rate Calculation (Card price multiplied by quantity)
             $card_rate = $card->price;
-            $this->total = $card_rate * $this->quantity; // Total cost for all cards
-
-            // Calculate Discount (based on the entered discount percentage)
+            $this->total = $card_rate * $this->quantity; 
             $this->discount = is_numeric($this->discount) && $this->discount > 0 ? $this->discount : 0;
-            $this->discount_amount = ($this->total * $this->discount) / 100; // Discount amount based on total
-
-            // Correct Inner Price Calculation:
-            // Multiply the inner quantity (from Rate model) by the inner price (from Card model)
+            $this->discount_amount = ($this->total * $this->discount) / 100;
             $this->inner_price_total = $card->inner_price * $this->inner_quantity;
-
-            // Grand Total Calculation: Total card cost + Inner price total - Discount applied
             $this->grand_total = max(0, $this->total + $this->inner_price_total - $this->discount_amount);
-        
-            // Save calculated data into database
             $this->saveRate();
+        } else {
+            // Handle case where no valid card is selected
+            session()->flash('error', 'Please select a valid card to calculate.');
         }
     }
-
     public function render()
     {
-        // Load all available cards for user selection
+        // 
         $cards = Card::all();
         return view('livewire.card-details', compact('cards'));
     }
