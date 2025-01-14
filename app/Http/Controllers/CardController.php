@@ -34,7 +34,7 @@ class CardController extends Controller
         // Validate the incoming data manually
         $request->validate([
             'card_number' => 'required|string|unique:cards',
-            'inner_price' => 'required|integer',
+            'inner_price' => 'required|numeric|min:0',
             'price' => 'required|numeric|min:0',
         ]);
 
