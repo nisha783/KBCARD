@@ -14,7 +14,6 @@
                         </ul>
                     </div>
                 @endif
-
                 <div class="card-body">
                     <h4 class="card-title text-center mb-4 fw-bold">Add New Card</h4>
                     <!-- Success Message -->
@@ -36,6 +35,7 @@
                             @enderror
                         </div>
 
+
                         <!-- Price -->
                         <div class="mb-3">
                             <label for="price" class="form-label">Price</label>
@@ -45,8 +45,8 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <!-- Inner Price -->
-                        <div class="mb-3">
+                          <!-- Inner Price -->
+                          <div class="mb-3">
                             <label for="inner_price" class="form-label">Inner Price</label>
                             <input type="number" class="form-control @error('inner_price') is-invalid @enderror"
                                 id="inner_price" name="inner_price" value="{{ old('inner_price') }}" required>
@@ -54,7 +54,6 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-
 
                         <button type="submit" class="btn btn-primary w-100">Add Card</button>
                     </form>
