@@ -16,14 +16,14 @@
         /* Sidebar Styles */
         .sidebar {
             min-height: 140vh;
-            background-color: #0e5ba8; /* Blue Background */
+            background-color: #0e5ba8;
             box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
             padding: 10px 0;
             position: fixed;
             top: 0;
             left: 0;
             width: 250px;
-            z-index: 1050; /* Keep above content */
+            z-index: 1050; 
         }
 
         .sidebar a {
