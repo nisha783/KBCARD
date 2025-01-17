@@ -20,8 +20,8 @@
                 <tr>
                   <th>#</th>
                   <th>Card Number</th>
-                  <th>Inner Price</th>
                   <th>Price</th>
+                  <th>Inner Price</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -30,8 +30,8 @@
                 <tr>
                   <td>{{ $loop->iteration }}</td>
                   <td>{{ $card->card_number }}</td>
-                  <td>{{ $card->inner_price }}</td>
                   <td>{{ $card->price }}</td>
+                  <td>{{ $card->inner_price }}</td>
                   <td>
                     <!-- Edit Button -->
                     <a href="{{ route('card.edit', $card->id) }}" class="btn btn-warning btn-sm text-white">Edit</a>

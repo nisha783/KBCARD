@@ -34,15 +34,15 @@ class CardController extends Controller
         // Validate the incoming data manually
         $request->validate([
             'card_number' => 'required|string|unique:cards',
-            'inner_price' => 'required|numeric|min:0',
             'price' => 'required|numeric|min:0',
+            'inner_price' => 'required|numeric|min:0',
         ]);
 
         // Store the new card using request input
         Card::create([
             'card_number' => $request->input('card_number'),
-            'inner_price' => $request->input('inner_price'),
             'price' => $request->input('price'),
+            'inner_price' => $request->input('inner_price'),
         ]);
 
         // Redirect with a success message
@@ -73,15 +73,15 @@ class CardController extends Controller
         // Validate the incoming data manually
         $request->validate([
             'card_number' => 'required|string|unique:cards,card_number,' . $card->id,
-            'inner_price' => 'required|integer',
             'price' => 'required|numeric|min:0',
+            'inner_price' => 'required|integer',
         ]);
 
         // Update the card using request input
         $card->update([
             'card_number' => $request->input('card_number'),
-            'inner_price' => $request->input('inner_price'),
             'price' => $request->input('price'),
+            'inner_price' => $request->input('inner_price'),
         ]);
 
         // Redirect with a success message

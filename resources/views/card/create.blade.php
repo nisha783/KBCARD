@@ -48,7 +48,7 @@
                           <!-- Inner Price -->
                           <div class="mb-3">
                             <label for="inner_price" class="form-label">Inner Price</label>
-                            <input type="number" class="form-control @error('inner_price') is-invalid @enderror"
+                            <input type="text" class="form-control @error('inner_price') is-invalid @enderror"
                                 id="inner_price" name="inner_price" value="{{ old('inner_price') }}" required>
                             @error('inner_price')
                                 <div class="invalid-feedback">{{ $message }}</div>

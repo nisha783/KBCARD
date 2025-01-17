@@ -28,17 +28,6 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                         @enderror
                                     </div>
-                                    
-                                    <!-- Quantity -->
-                                    <div class="mb-3">
-                                        <label for="inner_price" class="form-label">Inner Price</label>
-                                        <input type="number" class="form-control @error('inner_price') is-invalid @enderror"
-                                        id="qty" name="inner_price" value="{{ old('inner_price', $card->inner_price) }}" required>
-                                        @error('qty')
-                                        <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-                                    
                                     <!-- Price -->
                                     <div class="mb-3">
                                     <label for="price" class="form-label">Price</label>
@@ -48,6 +37,17 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                 </div>
+                                    
+                                    <!-- Quantity -->
+                                    <div class="mb-3">
+                                        <label for="inner_price" class="form-label">Inner Price</label>
+                                        <input type="text" class="form-control @error('inner_price') is-invalid @enderror"
+                                        id="qty" name="inner_price" value="{{ old('inner_price', $card->inner_price) }}" required>
+                                        @error('qty')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    
 
                                 <!-- Submit Button -->
                                 <button type="submit" class="btn btn-primary">Update Card</button>
