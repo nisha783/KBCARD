@@ -74,7 +74,8 @@ class CardController extends Controller
         $request->validate([
             'card_number' => 'required|string|unique:cards,card_number,' . $card->id,
             'price' => 'required|numeric|min:0',
-            'inner_price' => 'required|integer',
+            'inner_price' => 'required|numeric|min:0',
+            
         ]);
 
         // Update the card using request input
