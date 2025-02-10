@@ -1,6 +1,7 @@
 @extends('layouts.app')
+
 @section('content')
-    <div class="col-md-9 d-flex align-items-center justify-content-center"  style="margin-bottom: 300px;">
+    <div class="col-md-9 d-flex align-items-center justify-content-center" style="margin-bottom: 300px;">
         <div class="card w-50">
             @if (session('success'))
                 <div class="alert alert-success">{{ session('success') }}</div>
@@ -17,6 +18,7 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+
                     <div class="mb-3">
                         <label for="value" class="form-label">Value</label>
                         <input type="text" name="value" id="value"
@@ -25,11 +27,12 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+
+
+
                     <button type="submit" class="btn btn-primary w-100">Save</button>
                 </form>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 @endsection

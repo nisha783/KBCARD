@@ -20,7 +20,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $setting->key }}</td>
-                        <td>{{ $setting->value }}%</td>
+                        <td>{{ $setting->value }}</td>
                         <td>
                             <a href="{{ route('settings.edit', $setting->id) }}" class="btn btn-warning btn-sm text-white">Edit</a>
                         </td>
