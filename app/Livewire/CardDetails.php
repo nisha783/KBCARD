@@ -20,6 +20,8 @@ class CardDetails extends Component
     public $total_inners = 0;      // Total inners across all cards
     public $extra_inner_price = 0; // Extra cost of additional inners
     public $screen_price = 0;      // Screen price from settings
+    public $screen_qty = 0;
+    
 
     public function mount()
     {
@@ -58,7 +60,7 @@ class CardDetails extends Component
             $this->inner_price_total = ($card->inner_price ?? 0) * $this->inner_quantity;
             
             // Add screen price multiplied by quantity
-            $screen_price_total = $this->screen_price * $this->quantity;
+            $screen_price_total = $this->screen_price * $this->screen_qty;
             
             // Calculate the grand total
             $this->grand_total = max(0, $this->total + $this->inner_price_total + $screen_price_total - $this->discount_amount);

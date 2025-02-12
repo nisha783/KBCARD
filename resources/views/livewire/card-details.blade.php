@@ -32,8 +32,8 @@
 
                     <!-- Screen Price Input (NEW) -->
                     <div class="mb-3">
-                        <label for="screen_price" class="form-label">Screen Price</label>
-                        <input type="number" id="screen_price" class="form-control" wire:model="screen_price">
+                        <label for="screen_qty" class="form-label">Screen Qty</label>
+                        <input type="number" id="screen_qty" class="form-control" wire:model="screen_qty">
                     </div>
 
                     <!-- Calculate Button -->
