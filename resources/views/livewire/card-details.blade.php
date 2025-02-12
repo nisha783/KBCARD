@@ -91,8 +91,8 @@
                                 <!-- Screen Price (NEW) -->
                                 <tr>
                                     <td>Screen Price:</td>
-                                    <td>Rs. {{ number_format($screen_price, 2) }} x {{ $quantity }} = Rs.
-                                        {{ number_format($screen_price * $quantity, 2) }}/-</td>
+                                    <td>Rs. {{ number_format($screen_price, 2) }} x {{ $screen_qty }} = Rs.
+                                        {{ number_format($screen_price * $screen_qty, 2) }}/-</td>
                                 </tr>
 
                                 <tr>
